@@ -1,0 +1,118 @@
+{% extends 'website/base.html' %}
+{% load static %}
+{% block title %}Home - Budget Manager{% endblock %}
+
+{% block body %}
+<div class="container-fluid py-4">
+   
+   
+    <div class="row mb-4">
+      <div class="col-lg-8 col-md-6 mb-md-0 mb-4">
+        <div class="card">
+          <div class="card-header pb-0">
+            <div class="row">
+              <div class="col-lg-6 col-7">
+                <h6>Expenses - {{ month }}</h6>
+                <p class="text-sm mb-0">
+                  <i class="fa fa-check text-info" aria-hidden="true"></i>
+                  <span class="font-weight-bold ms-1">{{ currencySymbol.settingValue }}{% if totalSpent.amount__sum == None %}0{% else %}{{ totalSpent.amount__sum }}{% endif %}
+                  </span> this month
+                </p>
+              </div>
+              <div class="col-lg-6 col-5 my-auto text-end">
+                <div class="dropdown float-lg-end pe-4">
+                  <a class="cursor-pointer" id="dropdownTable" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fa fa-ellipsis-v text-secondary"></i>
+                  </a>
+                  <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5" aria-labelledby="dropdownTable">
+                    <li><a class="dropdown-item border-radius-md" href="javascript:;">Action</a></li>
+                    <li><a class="dropdown-item border-radius-md" href="javascript:;">Another action</a></li>
+                    <li><a class="dropdown-item border-radius-md" href="javascript:;">Something else here</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-body px-0 pb-2">
+            <div class="table-responsive">
+              <table class="table align-items-center mb-0">
+                <thead>
+                  <tr>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Category</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Date</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Amount</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for expense in expenses %}
+                  <tr>
+                    <td>
+                      <div class="d-flex px-2 py-1">
+              
+                      
+                          <span class="text-xs font-weight-bold"><i class="{{ expense.category.icon }}" style="margin-right: 5px;"></i> {{ expense.category.name }} </span>
+                       
+                      </div>
+                    </td>
+                   
+                      <td class=" text-sm">
+                        <span class="text-xs font-weight-bold"> {{ expense.date }} </span>
+                      </td>
+                    
+                    <td class="align-middle text-center text-sm">
+                      <span class="text-xs font-weight-bold"> {{ currencySymbol.settingValue }}{{ expense.amount }} </span>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6">
+        <div class="card h-100">
+          <div class="card-header pb-0">
+            <h6>Categories Tracker</h6>
+            <p class="text-sm">
+              <span class="font-weight-bold">Tracker</span>  spending by category.
+            </p>
+          </div>
+          <div class="card-body p-3">
+            {% for top in categories_top %}
+            <div class="timeline timeline-one-side">
+              <div class="timeline-block mb-3">
+                <span class="timeline-step">
+                  <i class="{{ top.icon }}" style="margin-right: 5px;"></i>
+                </span>
+                <div class="timeline-content">
+                  <h6 class="text-dark text-sm font-weight-bold mb-0">{{ top.name }}</h6>
+                  <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">
+                    {{ currencySymbol.settingValue }}{% if top.amount.amount__sum == None %}0{% else %}{{ top.amount.amount__sum }}{% endif %}
+                  </p>
+                </div>
+              </div>
+          
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="footer py-4  ">
+      <div class="container-fluid">
+        <div class="row align-items-center justify-content-lg-between">
+          <div class="col-lg-6 mb-lg-0 mb-4">
+            <div class="copyright text-center text-sm text-muted text-lg-start">
+              © <script>
+                document.write(new Date().getFullYear())
+              </script> Coded by Anton Adrian & Designed by
+              <a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">Creative Tim</a>.
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </footer>
+  </div>
+{% endblock %}

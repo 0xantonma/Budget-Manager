@@ -1,0 +1,40 @@
+{% extends 'website/base.html' %}
+{% load static %}
+{% block title %}Settings - Budget Manager{% endblock %}
+
+
+{% block body %}
+<div class="row" style="margin-top: 50px;">
+    <div class="col-4">
+      <div class="card my-4">
+        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+          <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+            <h6 class="text-white text-capitalize ps-3">Change Currency</h6>
+          </div>
+        </div>
+        <div class="card-body px-0 pb-2" style="margin: 15px;">
+          <p>Current symbol: <b>{{ currencySymbol.settingValue }}</b></p>
+         
+            <form action="{% url 'settings' %}" method="POST" class="text-start">
+              {% csrf_token %}
+              <input type="hidden" name="settingName" value="currency">
+            
+              <div class="input-group input-group-outline my-3">
+                       
+                <input type="text" id="id_settingValue" placeholder="Currency Symbol" name="settingValue" class="form-control">
+              </div>
+
+           
+         
+            
+            <div class="text-center">
+                <button type="submit" class="btn bg-gradient-primary w-100 my-4 mb-2">Add</button>
+              </div>
+            </form>
+         
+        </div>
+      </div>
+    </div>
+    
+  </div>
+{% endblock %}

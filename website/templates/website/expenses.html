@@ -1,0 +1,47 @@
+{% extends 'website/base.html' %}
+{% load static %}
+{% block title %}Expenses - Budget Manager{% endblock %}
+
+
+{% block body %}
+<div class="row" style="margin-top: 50px;">
+    <div class="col-12">
+      <div class="card my-4">
+        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+          <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+            <h6 class="text-white text-capitalize ps-3">Expenses</h6>
+          </div>
+        </div>
+        <div class="card-body px-0 pb-2">
+          <div class="table-responsive p-0">
+            <table class="table align-items-center justify-content-center mb-0">
+              <thead>
+                <tr>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Amount</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Category</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Date</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Note</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+             {% for expense in expenses %}
+                <tr>
+                    <td>{{ currencySymbol.settingValue }}{{ expense.amount }}</td>
+                    <td><i class="{{ expense.category.icon }}" style="margin-right: 5px;"></i> {{ expense.category.name }}</td>
+                    <td>{{ expense.date }}</td>
+                    <td>{{ expense.note }}</td>
+                    <td> <a href="{% url 'expenseDelete' expense.id %}" class="btn bg-gradient-primary " style="margin-top:15px;">Delete</a></td>
+                </tr>
+             {% endfor %}
+               
+            
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+{% endblock %}

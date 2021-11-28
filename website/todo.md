@@ -1,0 +1,6 @@
+- Users part
+- Budget
+- Error & Success messages
+- Bug category (When you add sub category it adds to parent category)
+- Home function show how much left of the budget
+- Install.php (default currency: USD)
